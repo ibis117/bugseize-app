@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('exceptions', function (Blueprint $table) {
+        Schema::create('exception_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->json('log');
-
+            $table->string('project_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exceptions');
+        Schema::dropIfExists('exception_logs');
     }
 };

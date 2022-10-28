@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('issues', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
-            $table->text('key');
-            $table->string('url');
-            $table->text('description');
-            $table->string('user_id')->nullable();
+            $table->string('exception');
+            $table->integer('line');
+            $table->string('project_id');
+            $table->string('bug_exception_id')->nullable();
+            $table->string('status')->default('unread');
+            $table->timestamp('last_occurred_at');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('issues');
     }
 };
