@@ -5,8 +5,8 @@ export const useAuthStore = defineStore('auth', {
     state: () => ({
         isLoggedIn: false,
         credentials: {
-            username: 'sanil',
-            password: 'password1'
+            username: '',
+            password: ''
         },
         user: null
     }),
@@ -28,6 +28,8 @@ export const useAuthStore = defineStore('auth', {
         login() {
             axios.get('/sanctum/csrf-cookie').then(response => {
                 axios.post('/api/login', this.credentials).then(res => {
+                    this.credentials.username = '';
+                    this.credentials.password = '';
                     this.setAuth(true, '/');
                 });
             });
