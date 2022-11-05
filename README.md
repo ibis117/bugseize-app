@@ -1,1 +1,1 @@
-test hook
+npm test
