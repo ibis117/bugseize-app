@@ -55,6 +55,7 @@ class ProcessExceptionLog implements ShouldQueue
             'exception' => $exception,
             'line' => $line,
             'project_id' => $project_id,
+        ], [
             'last_occurred_at' => now()
         ]);
 
