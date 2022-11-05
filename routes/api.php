@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/bug-exceptions/{id}', App\Actions\BugException\ShowBugexception::class);
     Route::put('/bug-exceptions/{id}', App\Actions\BugException\UpdateBugexception::class);
     Route::delete('/bug-exceptions/{id}', App\Actions\BugException\DeleteBugexception::class);
+    Route::get('/bug-exceptions/{id}/mark-as-read', App\Actions\BugException\MarkBugexceptionAsRead::class);
 });
 
 

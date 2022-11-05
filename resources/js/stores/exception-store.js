@@ -45,6 +45,16 @@ export const useExceptionStore = defineStore('exception', {
             return axios.get(`/api/bug-exceptions/${id}`)
                 .then(res => {
                     this.exception = res.data;
+                    if (this.exception.status === 'unread') {
+                        this.markAsRead(id);
+                    }
+                })
+        },
+
+        markAsRead(id) {
+            return axios.get(`/api/bug-exceptions/${id}/mark-as-read`)
+                .then(res => {
+                    this.exception = res.data;
                 })
         }
     }
