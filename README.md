@@ -1,1 +1,5 @@
-test1324
+
+# Bug Seize
+
+Project to catch given exception from laravel and display under admin panel
+
