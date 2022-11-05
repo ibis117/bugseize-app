@@ -11,4 +11,8 @@ class ExceptionLog extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'log' => 'array'
+    ];
 }

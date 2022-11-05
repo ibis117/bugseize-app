@@ -11,4 +11,10 @@ class BugException extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
+
+    protected $casts = [
+        'executor' => 'array',
+        'storage' => 'array',
+        'user'=> 'array',
+    ];
 }

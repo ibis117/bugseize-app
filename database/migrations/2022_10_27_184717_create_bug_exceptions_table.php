@@ -21,15 +21,15 @@ return new class extends Migration
             $table->json('executor');
             $table->text('exception');
             $table->text('environment');
-            $table->json('additional');
+            $table->json('additional')->nullable();
             $table->longText('errors');
             $table->integer('line');
             $table->json('storage');
             $table->text('file');
-            $table->json('user');
+            $table->json('user')->nullable();
             $table->string('status')->default('unread');
             $table->string('project_id');
-            $table->string('issue_id');
+            $table->string('issue_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

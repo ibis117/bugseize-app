@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-gray-100">
+    <div class="w-full bg-slate-300">
         <Header/>
         <section class="mt-[80px] flex h-auto">
             <Sidebar/>
@@ -7,6 +7,11 @@
         <section class="duration-200" :class="isSideBarOpen ? 'ml-[120px]' : '' ">
             <perfect-scrollbar>
                 <div class="m-4">
+<!--                    <router-view v-slot="{ Component }">-->
+<!--                        <transition name="fade" mode="out-in">-->
+<!--                            <component :is="Component" />-->
+<!--                        </transition>-->
+<!--                    </router-view>-->
                     <router-view></router-view>
                 </div>
             </perfect-scrollbar>
@@ -29,4 +34,14 @@ const {isSideBarOpen, toggleSideBar} = storeToRefs(useSideBarStore());
 .ps {
     min-height: calc(100vh - 80px);
 }
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
 </style>

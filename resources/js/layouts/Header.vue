@@ -1,5 +1,5 @@
 <template>
-    <header class="w-full bg-white h-[80px] top-0 shadow fixed z-30">
+    <n-layout class="w-full h-[80px] top-0 shadow fixed z-30">
         <div class="flex justify-between">
             <div class="flex items-center">
                 <div class="w-[120px] text-center relative text-purple-500 p-4">
@@ -47,23 +47,37 @@
 
                     </div>
                     <div class="mx-4">
-                        <n-dropdown trigger="click"
-                                    :options="[{label: 'Account Setings', key: 'Account Setings'}, {label: 'Billing History', key: 'Billing History'}, {label: 'Sign Out', key: 'Sign Out'}]">
-                            <n-avatar round size="large">S</n-avatar>
+                        <n-dropdown trigger="click" @select="onDropDownSelect"
+                                    :options="[{label: 'Profile', key: 'Profile'}, {label: 'Logout', key: 'Logout'}]">
+                            <n-button circle>{{ user?.username.charAt(0).toUpperCase() }}</n-button>
                         </n-dropdown>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </n-layout>
 </template>
 
 <script setup>
 import {Archway, Bars, AngleDown, Bell} from '@vicons/fa'
 import {useSideBarStore} from "../stores/sidebar-store";
 import {storeToRefs} from "pinia";
+import {useAuthStore} from "../stores/auth-store";
+import {onMounted} from "vue";
 
 const {isSideBarOpen, toggleSideBar} = useSideBarStore();
+const authStore = useAuthStore()
+const {user} = storeToRefs(authStore)
+
+onMounted(() => {
+    authStore.getUser();
+})
+
+const onDropDownSelect = (key) => {
+    if (key === 'Logout') {
+        authStore.logout();
+    }
+}
 
 </script>
 

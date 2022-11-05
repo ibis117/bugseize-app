@@ -3,7 +3,7 @@
 namespace App\Actions\Project;
 
 use App\Models\Project;
-use App\Traits\UpdateAction;
+use Ibis117\CrudActions\Traits\UpdateAction;
 
 class UpdateProject
 {
@@ -17,4 +17,6 @@ class UpdateProject
             //
         ];
     }
+
+
 }

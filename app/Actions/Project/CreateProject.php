@@ -3,7 +3,7 @@
 namespace App\Actions\Project;
 
 use App\Models\Project;
-use App\Traits\CreateAction;
+use Ibis117\CrudActions\Traits\CreateAction;
 
 class CreateProject
 {
@@ -13,6 +13,9 @@ class CreateProject
 
     public function rules(): array
     {
-        return [];
+        return [
+            'name' => 'required',
+            'url' => 'required'
+        ];
     }
 }

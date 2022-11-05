@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->json('log');
             $table->string('project_id')->nullable();
+            $table->boolean('is_processed')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

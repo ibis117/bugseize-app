@@ -3,7 +3,8 @@
 namespace App\Actions\Project;
 
 use App\Models\Project;
-use App\Traits\DeleteAction;
+use Ibis117\CrudActions\Traits\DeleteAction;
+
 
 class DeleteProject
 {

@@ -51,7 +51,7 @@
 import {ChartBar, Bug, Archive, File} from '@vicons/fa'
 import {storeToRefs} from "pinia";
 import {useSideBarStore} from "../stores/sidebar-store";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, shallowRef} from "vue";
 import {useRoute} from "vue-router";
 
 
@@ -61,7 +61,7 @@ const sidebarStore = useSideBarStore()
 
 const {isSideBarOpen, toggleSideBar, isSecondarySideBarOpen, currentHoverMenu} = storeToRefs(sidebarStore);
 
-const hoveredMenu = ref({});
+const hoveredMenu = shallowRef({});
 
 onMounted(() => {
     window.addEventListener('resize', useSideBarStore().onResize);
@@ -73,9 +73,10 @@ const isCurrentRoute = (currentPath) => {
 }
 
 const menuList = [
-    {name: 'Dashboard', path: '/', icon: ChartBar, subMenu:[{ name: 'Dashboard One', path: '/', icon: File }]},
-    {name: 'Project', path: '/login', icon: Archive},
-    {name: 'Exception', path: '/exceptions', icon: Bug},
+    {name: 'Dashboard', path: '/', icon: ChartBar},
+    // subMenu:[{ name: 'Dashboard One', path: '/', icon: File }]
+    {name: 'Project', path: '/project', icon: Archive},
+    {name: 'Exception', path: '/exception', icon: Bug},
 ]
 
 const subMenuList = computed(() => {
