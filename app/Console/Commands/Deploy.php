@@ -29,6 +29,7 @@ class Deploy extends Command
     public function handle()
     {
         $this->start([
+            'php artisan -V',
             'composer install',
             'php artisan migrate',
             'npm install',
