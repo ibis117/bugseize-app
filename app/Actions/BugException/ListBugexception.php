@@ -20,7 +20,6 @@ class ListBugexception
 
     protected function filter($query, $filter)
     {
-        dd($filter);
         return $query;
     }
 
