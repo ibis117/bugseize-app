@@ -42,39 +42,17 @@
                     </n-tab-pane>
                     <n-tab-pane name="Request" tab="Request">
                         <div class="">
-                            <div class="mt-4 flex shadow-lg border rounded-lg">
-                                <span class="p-4 bg-slate-100 w-1/5">HOST</span>
-                                <span class="p-4">{{ exception.host }}</span>
-                            </div>
-
-                            <div class="mt-4 flex shadow-lg border rounded-lg">
-                                <span class="p-4 bg-slate-200 w-1/5">CONNECTION</span>
-                                <span class="p-4">{{ exception.connection }}</span>
-                            </div>
-
-                            <div class="mt-4 flex shadow-lg border rounded-lg">
-                                <span class="p-4 bg-slate-200 w-1/5">ACCEPT</span>
-                                <span class="p-4">{{ exception.connection }}</span>
-                            </div>
-
-                            <div class="mt-4 flex shadow-lg border rounded-lg">
-                                <span class="p-4 bg-slate-200 w-1/5">ACCEPT-ENCODING</span>
-                                <span class="p-4">{{ exception.connection }}</span>
-                            </div>
-
-                            <div class="mt-4 flex shadow-lg border rounded-lg">
-                                <span class="p-4 bg-slate-200 w-1/5">ACCEPT-LANGUAGE</span>
-                                <span class="p-4">{{ exception.connection }}</span>
-                            </div>
-
-                            <div class="mt-4 flex shadow-lg border rounded-lg">
-                                <span class="p-4 bg-slate-200 w-1/5">COOKIE</span>
-                                <span class="p-4">{{ exception.connection }}</span>
+                            <div class="mt-4 flex shadow-lg border rounded-lg" v-for="header in getHeaders(exception)">
+                                <span class="p-4 bg-slate-100 w-1/5">{{ header.key }}</span>
+                                <span class="p-4 w-4/5">{{ header.value }}</span>
                             </div>
                         </div>
                     </n-tab-pane>
                     <n-tab-pane name="Server" tab="Server">
-                        Server
+                        <div class="mt-4 flex shadow-lg border rounded-lg" v-for="server in getServer(exception)">
+                            <span class="p-4 bg-slate-100 w-1/5">{{ server.key }}</span>
+                            <span class="p-4 w-4/5">{{ server.value }}</span>
+                        </div>
                     </n-tab-pane>
                     <n-tab-pane name="Stack Trace" tab="Stack Trace">
                         <div v-for="trace in exception.errors.split('\n')">
@@ -90,7 +68,6 @@
 <script setup>
 import {useExceptionStore} from "../../stores/exception-store";
 import {storeToRefs} from "pinia";
-import { AngleRight } from '@vicons/fa'
 import moment from "moment";
 import {useRoute} from "vue-router";
 import ShowCode from "../../components/ShowCode.vue"
@@ -101,6 +78,24 @@ const {exception} = storeToRefs(exceptionStore)
 const exception_id = route.params.id;
 exceptionStore.show(exception_id);
 
+
+const getHeaders = (data) => {
+    return Object.entries(data.storage.HEADERS).map((header) => {
+        return {
+            key: header[0],
+            value: header[1][0]
+        }
+    });
+}
+
+const getServer = (data) => {
+    return Object.entries(data.storage.SERVER).map((header) => {
+        return {
+            key: header[0],
+            value: header[1]
+        }
+    });
+}
 
 
 </script>

@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^3.2.0",
+        "centrifuge": "^3.0.1",
         "moment": "^2.29.4",
         "pinia": "^2.0.23",
         "pinia-plugin-persistedstate": "^2.3.0",

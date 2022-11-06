@@ -32,5 +32,10 @@ class Project extends Model
         return $this->exception()->where('status', 'unread');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
 }

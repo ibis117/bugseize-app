@@ -2,9 +2,11 @@
 
 namespace App\Jobs;
 
+use App\Broadcasting\RecentExceptionChannel;
 use App\Models\BugException;
 use App\Models\ExceptionLog;
 use App\Models\Issue;
+use App\Models\Project;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -36,6 +38,7 @@ class ProcessExceptionLog implements ShouldQueue
     public function handle()
     {
         $exception_log = $this->log;
+
         $log = $exception_log->log;
         $project_id = $exception_log->project_id;
         $errors = $log['error'];
@@ -73,6 +76,7 @@ class ProcessExceptionLog implements ShouldQueue
             'user' => $user,
             'project_id' => $project_id,
             'issue_id' => $issue->id,
+            'status' => 'unread',
         ]);
 
         if (!$issue->bug_exception_id) {
@@ -82,5 +86,7 @@ class ProcessExceptionLog implements ShouldQueue
 
         $exception_log->is_processed = true;
         $exception_log->save();
+        $user = Project::find($exception_log->project_id)->user()->first();
+        RecentExceptionChannel::dispatch($bug_exception, $user->id);
     }
 }

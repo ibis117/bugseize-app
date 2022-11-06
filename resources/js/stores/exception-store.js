@@ -17,7 +17,7 @@ export const useExceptionStore = defineStore('exception', {
                 page: this.currentPage,
                 rowsPerPage: this.perPage,
             }
-        }
+        },
     },
 
     actions: {
@@ -56,6 +56,7 @@ export const useExceptionStore = defineStore('exception', {
                 .then(res => {
                     this.exception = res.data;
                 })
-        }
+        },
+
     }
 })

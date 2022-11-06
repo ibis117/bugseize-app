@@ -18,5 +18,11 @@ class ListBugexception
             ->paginate($count);
     }
 
+    protected function filter($query, $filter)
+    {
+        dd($filter);
+        return $query;
+    }
+
 
 }

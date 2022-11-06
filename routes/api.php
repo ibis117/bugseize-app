@@ -1,6 +1,8 @@
 <?php
 
+use App\Actions\Centrifuge\CreateCentrifugeUserToken;
 use App\Actions\Log\CreateExceptionLog;
+use App\Actions\User\UserRecentExceptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +52,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/bug-exceptions/{id}', App\Actions\BugException\UpdateBugexception::class);
     Route::delete('/bug-exceptions/{id}', App\Actions\BugException\DeleteBugexception::class);
     Route::get('/bug-exceptions/{id}/mark-as-read', App\Actions\BugException\MarkBugexceptionAsRead::class);
+    Route::get('/recent-bug-exceptions', UserRecentExceptions::class);
+
+    //broadcast
+    Route::get('/centrifuge/token', CreateCentrifugeUserToken::class);
+
 });
 
 
