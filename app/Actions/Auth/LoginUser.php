@@ -49,7 +49,8 @@ class LoginUser
     public function asController(ActionRequest $request)
     {
         $credentials = $request->only('username', 'password');
-        $token = $this->handle(...$credentials);
+        $credentials['isTokenAuth'] = true;
+        $token = $this->handle(...$credentials, );
         if ($token) {
             return response([
                 'token' => $token

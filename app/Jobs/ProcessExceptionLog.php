@@ -87,6 +87,6 @@ class ProcessExceptionLog implements ShouldQueue
         $exception_log->is_processed = true;
         $exception_log->save();
         $user = Project::find($exception_log->project_id)->user()->first();
-        RecentExceptionChannel::dispatch($bug_exception, $user->id);
+        RecentExceptionChannel::dispatch($user->id);
     }
 }

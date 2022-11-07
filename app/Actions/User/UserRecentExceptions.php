@@ -14,7 +14,7 @@ class UserRecentExceptions
     {
         $user_id = auth()->user()->id;
         $exceptions = (User::with(['exceptions' => function ($q) {
-            $q->paginate(5);
+            $q->orderBy('created_at', 'desc')->paginate(5);
         }])->find($user_id))->exceptions;
         return $exceptions;
     }

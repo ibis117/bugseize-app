@@ -11,4 +11,9 @@ class Issue extends Model
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
+
+    public function exceptions()
+    {
+        return $this->hasMany(BugException::class);
+    }
 }

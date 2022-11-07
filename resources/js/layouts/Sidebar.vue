@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import {ChartBar, Bug, Archive, File} from '@vicons/fa'
+import {ChartBar, Bug, Archive, File, InfoCircle} from '@vicons/fa'
 import {storeToRefs} from "pinia";
 import {useSideBarStore} from "../stores/sidebar-store";
 import {computed, onMounted, ref, shallowRef} from "vue";
@@ -77,6 +77,7 @@ const menuList = [
     // subMenu:[{ name: 'Dashboard One', path: '/', icon: File }]
     {name: 'Project', path: '/project', icon: Archive},
     {name: 'Exception', path: '/exception', icon: Bug},
+    {name: 'Issue', path: '/issue', icon: InfoCircle},
 ]
 
 const subMenuList = computed(() => {

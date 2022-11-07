@@ -16,7 +16,7 @@ class RecentExceptionChannel implements ShouldBroadcastNow
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public BugException $exception;
+
     public string $user_id;
 
     /**
@@ -25,16 +25,15 @@ class RecentExceptionChannel implements ShouldBroadcastNow
      * @return void
      */
 
-    public function __construct(BugException $exception, $user_id)
+    public function __construct($user_id)
     {
-        $this->exception = $exception;
         $this->user_id = $user_id;
     }
 
     public function broadcastWith()
     {
         return [
-            'exception' => $this->exception,
+            'message' => 'Get recent exceptions',
         ];
     }
 

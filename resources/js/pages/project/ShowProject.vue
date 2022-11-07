@@ -37,7 +37,7 @@
         </n-grid-item>
 
         <n-grid-item span="3">
-            <list-exception :id="project.id"/>
+            <list-exception :id="project.id" :show-filter="false"/>
         </n-grid-item>
 
     </n-grid>

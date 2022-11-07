@@ -20,6 +20,7 @@ class ListBugexception
 
     protected function filter($query, $filter)
     {
+        $query->when(@$filter['project_id'], fn($q) => $q->where('project_id', $filter['project_id']));
         return $query;
     }
 

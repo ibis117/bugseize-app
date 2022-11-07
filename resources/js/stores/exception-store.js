@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import axios from "../api/axios";
+import {useProjectStore} from "./project-store";
 
 export const useExceptionStore = defineStore('exception', {
     state: () => ({
@@ -9,7 +10,8 @@ export const useExceptionStore = defineStore('exception', {
         lastPage: 1,
         perPage: 10,
         total: 0,
-        selected: []
+        selected: [],
+        filter: {}
     }),
     getters: {
         pagination() {
@@ -18,6 +20,10 @@ export const useExceptionStore = defineStore('exception', {
                 rowsPerPage: this.perPage,
             }
         },
+
+        projects() {
+            return useProjectStore().projects;
+        }
     },
 
     actions: {
@@ -25,11 +31,11 @@ export const useExceptionStore = defineStore('exception', {
             return axios.post('/api/bug-exceptions', this.exception)
         },
 
-        list(filter = null) {
+        list() {
             return axios.get('/api/bug-exceptions',{
                 params: {
                     page: this.currentPage,
-                    ...filter
+                    ...this.filter
                 }
             })
                 .then(res => {
@@ -57,6 +63,10 @@ export const useExceptionStore = defineStore('exception', {
                     this.exception = res.data;
                 })
         },
+
+        projectList() {
+            useProjectStore().list().then()
+        }
 
     }
 })

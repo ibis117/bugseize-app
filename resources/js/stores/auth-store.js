@@ -4,6 +4,7 @@ import axios from "../api/axios";
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         isLoggedIn: false,
+        token: '',
         credentials: {
             username: '',
             password: ''
@@ -11,11 +12,14 @@ export const useAuthStore = defineStore('auth', {
         user: null
     }),
     persist: {
-        paths: ['isLoggedIn']
+        paths: ['isLoggedIn', 'token']
     },
     getters: {
         isAuth(){
             return this.isLoggedIn;
+        },
+        getToken() {
+            return this.token;
         }
     },
 
@@ -25,13 +29,19 @@ export const useAuthStore = defineStore('auth', {
             this.router.push(path);
         },
 
+        setToken(token) {
+            this.token = token;
+        },
+
         login() {
-            axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.post('/api/login', this.credentials).then(res => {
-                    this.credentials.username = '';
-                    this.credentials.password = '';
-                    this.setAuth(true, '/');
-                });
+            // axios.get('/sanctum/csrf-cookie').then(response => {
+            //
+            // });
+            axios.post('/api/login', this.credentials).then(res => {
+                this.credentials.username = '';
+                this.credentials.password = '';
+                this.setToken(res.data.token);
+                this.setAuth(true, '/');
             });
         },
 

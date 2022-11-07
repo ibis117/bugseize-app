@@ -3,7 +3,8 @@ import axios from "../api/axios";
 
 export const useDashboardStore = defineStore('dashboard', {
     state: () => ({
-        exceptions: []
+        exceptions: [],
+        projects: []
     }),
     getters: {
 
@@ -13,6 +14,11 @@ export const useDashboardStore = defineStore('dashboard', {
         recentExceptions() {
             axios.get('/api/recent-bug-exceptions')
                 .then(res => this.exceptions = res.data)
+        },
+
+        listProject() {
+            axios.get('/api/projects')
+                .then(res => this.projects = res.data.data)
         },
 
         pushToExceptions(exception) {

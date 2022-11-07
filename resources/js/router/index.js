@@ -43,6 +43,12 @@ const router = createRouter({
                     component: () => import('../pages/exception/ShowException.vue')
                 },
 
+                {
+                    path: '/issue',
+                    name: 'issue',
+                    component: () => import('../pages/issue/ListIssue.vue')
+                },
+
             ]
         }
     ]
