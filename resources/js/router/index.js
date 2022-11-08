@@ -49,6 +49,24 @@ const router = createRouter({
                     component: () => import('../pages/issue/ListIssue.vue')
                 },
 
+                {
+                    path: '/user',
+                    name: 'user',
+                    component: () => import('../pages/user/Index.vue')
+                },
+
+                {
+                    path: '/role',
+                    name: 'role',
+                    component: () => import('../pages/role/Index.vue')
+                },
+
+                {
+                    path: '/setting',
+                    name: 'setting',
+                    component: () => import('../pages/setting/Index.vue')
+                },
+
             ]
         }
     ]

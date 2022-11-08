@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Actions\Issue;
+namespace App\Actions\Role;
 
 use App\Attributes\Permission;
-use App\Models\Issue;
+use App\Models\Role;
 use Ibis117\CrudActions\Traits\CreateAction;
 
-#[Permission(permission: 'issue:create')]
-class CreateIssue
+#[Permission(permission: 'role:create')]
+class CreateRole
 {
     use CreateAction;
 
-    protected string $model = Issue::class;
+    protected string $model = Role::class;
 
     public function rules(): array
     {

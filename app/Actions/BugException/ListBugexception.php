@@ -2,10 +2,11 @@
 
 namespace App\Actions\BugException;
 
+use App\Attributes\Permission;
 use App\Models\BugException;
 use Ibis117\CrudActions\Traits\ListAction;
 
-
+#[Permission(permission: 'bug-exception:list')]
 class ListBugexception
 {
     use ListAction;

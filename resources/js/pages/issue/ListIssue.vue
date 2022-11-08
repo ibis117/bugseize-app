@@ -1,7 +1,7 @@
 <template>
     <n-card title="Issues">
         <n-list hoverable clickable>
-            <n-list-item v-for="(issue,indexException) in issues" :key="indexException">
+            <n-list-item v-for="(issue,indexException) in issues" :key="indexException" @click="onShow(issue)">
                 <n-space justify="space-between" align="center">
                     <n-thing :title="issue.exception" content-style="margin-top: 10px;">
                         <template #description>
@@ -11,7 +11,7 @@
                                         {{ issue.status.toUpperCase() }}
                                     </n-tag>
                                     <n-tag :bordered="false" type="info" size="small">
-                                        Occurrence
+                                        OCCURRENCE
                                         <n-badge :value="issue.exceptions_count" />
                                     </n-tag>
                                     {{ moment(issue.last_occured_at).fromNow() }}
@@ -51,7 +51,7 @@ const props = defineProps({
 issueStore.list({id: props.id});
 
 const onShow = (issue) => {
-    router.push(`/issue/${issue.id}`)
+    router.push(`/exception/${issue.bug_exception_id}`)
 }
 
 

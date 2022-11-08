@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Actions\BugException;
+namespace App\Actions\Role;
 
 use App\Attributes\Permission;
-use App\Models\BugException;
+use App\Models\Role;
 use Ibis117\CrudActions\Traits\UpdateAction;
 
-#[Permission(permission: 'bug-exception:update')]
-class UpdateBugexception
+#[Permission(permission: 'role:update')]
+class UpdateRole
 {
     use UpdateAction;
 
-    protected string $model = BugException::class;
+    protected string $model = Role::class;
 
     public function rules(): array
     {

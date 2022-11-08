@@ -61,3 +61,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 
+Route::post('/users', App\Actions\User\CreateUser::class);
+Route::get('/users', App\Actions\User\ListUser::class);
+Route::get('/users/{user}', App\Actions\User\ShowUser::class);
+Route::put('/users/{user}', App\Actions\User\UpdateUser::class);
+Route::delete('/users/{user}', App\Actions\User\DeleteUser::class);
+Route::post('/roles', App\Actions\Role\CreateRole::class);
+Route::get('/roles', App\Actions\Role\ListRole::class);
+Route::get('/roles/{role}', App\Actions\Role\ShowRole::class);
+Route::put('/roles/{role}', App\Actions\Role\UpdateRole::class);
+Route::delete('/roles/{role}', App\Actions\Role\DeleteRole::class);

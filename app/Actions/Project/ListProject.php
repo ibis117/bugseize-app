@@ -2,10 +2,11 @@
 
 namespace App\Actions\Project;
 
+use App\Attributes\Permission;
 use App\Models\Project;
 use Ibis117\CrudActions\Traits\ListAction;
 
-
+#[Permission(permission: 'project:list')]
 class ListProject
 {
     use ListAction;
