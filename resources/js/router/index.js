@@ -50,6 +50,12 @@ const router = createRouter({
                 },
 
                 {
+                    path: '/client',
+                    name: 'client',
+                    component: () => import('../pages/client/Index.vue')
+                },
+
+                {
                     path: '/user',
                     name: 'user',
                     component: () => import('../pages/user/Index.vue')
@@ -59,6 +65,12 @@ const router = createRouter({
                     path: '/role',
                     name: 'role',
                     component: () => import('../pages/role/Index.vue')
+                },
+
+                {
+                    path: '/permission',
+                    name: 'permission',
+                    component: () => import('../pages/permission/Index.vue')
                 },
 
                 {

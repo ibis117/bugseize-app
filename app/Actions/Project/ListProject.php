@@ -13,11 +13,19 @@ class ListProject
 
     protected string $model = Project::class;
 
-    protected function paginate($query, $count)
+
+    protected function select()
     {
-        return $query->withCount(['exception', 'readException', 'issue'])
-            ->paginate($count);
+        return $this->model::query()
+                ->where('user_id', auth()->user()->id)
+                ->withCount(['exception', 'readException', 'issue']);
     }
+
+//    protected function paginate($query, $count)
+//    {
+//        return $query->
+//            ->paginate($count);
+//    }
 
     protected function filter($query, $filter)
     {

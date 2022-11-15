@@ -12,4 +12,9 @@ class ListRole
     use ListAction;
 
     protected string $model = Role::class;
+
+    protected function paginate($query, $count)
+    {
+        return $query->with(['permissions'])->paginate($count);
+    }
 }

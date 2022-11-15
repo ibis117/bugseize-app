@@ -19,7 +19,10 @@ class ListIssue
 
     protected function select()
     {
-        return $this->model::select()->withCount(['exceptions']);
+        return $this->model::select()->whereHas('project', function ($q) {
+            $q->where('user_id', auth()->user()->id);
+        })
+            ->withCount(['exceptions']);
     }
 
 

@@ -16,8 +16,20 @@ class UpdateRole
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required'
         ];
+    }
+
+    public function handle($id, array $data)
+    {
+        $model = $this->model::find($id);
+        $role = tap($model)->update([
+            'name' => $data['name']
+        ]);
+        if (@$data['permissions']){
+            $role->permissions()->sync($data['permissions']);
+        }
+        return $role;
     }
 
 

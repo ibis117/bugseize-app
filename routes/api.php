@@ -57,17 +57,33 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //broadcast
     Route::get('/centrifuge/token', CreateCentrifugeUserToken::class);
 
+    //Users
+    Route::post('/users', App\Actions\User\CreateUser::class);
+    Route::get('/users', App\Actions\User\ListUser::class);
+    Route::get('/users/{user}', App\Actions\User\ShowUser::class);
+    Route::put('/users/{user}', App\Actions\User\UpdateUser::class);
+    Route::delete('/users/{user}', App\Actions\User\DeleteUser::class);
+
+//Roles
+    Route::post('/roles', App\Actions\Role\CreateRole::class);
+    Route::get('/roles', App\Actions\Role\ListRole::class);
+    Route::get('/roles/{role}', App\Actions\Role\ShowRole::class);
+    Route::put('/roles/{role}', App\Actions\Role\UpdateRole::class);
+    Route::delete('/roles/{role}', App\Actions\Role\DeleteRole::class);
+
+//Permissions
+    Route::post('/permissions', App\Actions\Permission\CreatePermission::class);
+    Route::get('/permissions', App\Actions\Permission\ListPermission::class);
+    Route::get('/permissions/{permission}', App\Actions\Permission\ShowPermission::class);
+    Route::put('/permissions/{permission}', App\Actions\Permission\UpdatePermission::class);
+    Route::delete('/permissions/{permission}', App\Actions\Permission\DeletePermission::class);
+    Route::post('/sync-permission', App\Actions\Permission\SyncPermission::class);
+
 });
 
 
-
-Route::post('/users', App\Actions\User\CreateUser::class);
-Route::get('/users', App\Actions\User\ListUser::class);
-Route::get('/users/{user}', App\Actions\User\ShowUser::class);
-Route::put('/users/{user}', App\Actions\User\UpdateUser::class);
-Route::delete('/users/{user}', App\Actions\User\DeleteUser::class);
-Route::post('/roles', App\Actions\Role\CreateRole::class);
-Route::get('/roles', App\Actions\Role\ListRole::class);
-Route::get('/roles/{role}', App\Actions\Role\ShowRole::class);
-Route::put('/roles/{role}', App\Actions\Role\UpdateRole::class);
-Route::delete('/roles/{role}', App\Actions\Role\DeleteRole::class);
+Route::post('/clients', App\Actions\Client\CreateClient::class);
+Route::get('/clients', App\Actions\Client\ListClient::class);
+Route::get('/clients/{client}', App\Actions\Client\ShowClient::class);
+Route::put('/clients/{client}', App\Actions\Client\UpdateClient::class);
+Route::delete('/clients/{client}', App\Actions\Client\DeleteClient::class);

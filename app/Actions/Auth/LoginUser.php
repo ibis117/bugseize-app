@@ -50,7 +50,7 @@ class LoginUser
     {
         $credentials = $request->only('username', 'password');
         $credentials['isTokenAuth'] = true;
-        $token = $this->handle(...$credentials, );
+        $token = $this->handle(...$credentials);
         if ($token) {
             return response([
                 'token' => $token

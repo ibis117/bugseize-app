@@ -53,4 +53,10 @@ class User extends Authenticatable
     public function exceptions() {
         return $this->hasManyThrough(BugException::class, Project::class);
     }
+
+    public function clients()
+    {
+        return $this->belongsToMany(Client::class, 'client_users');
+    }
+
 }

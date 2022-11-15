@@ -19,4 +19,15 @@ class CreateRole
             //
         ];
     }
+
+    public function handle($data)
+    {
+        $role = $this->model::create([
+            'name' => $data['name']
+        ]);
+        if (@$data['permissions']){
+            $role->permissions()->sync($data['permissions']);
+        }
+        return $role;
+    }
 }

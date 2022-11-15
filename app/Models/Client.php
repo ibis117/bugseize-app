@@ -6,20 +6,9 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BugException extends Model
+class Client extends Model
 {
     use HasFactory, HasUuids;
 
     protected $guarded = ['id'];
-
-    protected $casts = [
-        'executor' => 'array',
-        'storage' => 'array',
-        'user'=> 'array',
-    ];
-
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
 }

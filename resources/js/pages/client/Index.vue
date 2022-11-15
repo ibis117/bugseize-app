@@ -1,7 +1,7 @@
 <template>
-    <n-card title="Roles">
+    <n-card title="Clients">
         <template #header-extra>
-            <n-button @click="onCreate">Add Role</n-button>
+            <n-button @click="onCreate">Add Client</n-button>
         </template>
         <n-skeleton text :repeat="7" height="50px" v-if="isLoading"/>
         <div v-else>
@@ -9,7 +9,7 @@
                 v-model:items-selected="selectedList"
                 buttons-pagination
                 :headers="headers"
-                :items="roleList"
+                :items="clientList"
                 table-class-name="customize-table"
                 header-text-direction="start"
                 body-text-direction="start"
@@ -18,7 +18,7 @@
                 v-model:server-options="pagination"
                 @click-row="onShow"
             >
-                <!--                show-index-->
+<!--                show-index-->
                 <template #item-operation="item">
                     <div>
                         <n-button class="m-1" @click="onEdit(item)">Edit</n-button>
@@ -33,8 +33,8 @@
                           @update:page="onPageChange"/>
         </div>
 
-        <n-modal v-model:show="showModal" preset="card" class="w-11/12" v-if="showModal">
-            <create-role @onSubmit="onSubmit" :is-update="isUpdate" />
+        <n-modal v-model:show="showModal" preset="card" class="w-11/12">
+            <create-client @onSubmit="onSubmit" :is-update="isUpdate" />
         </n-modal>
 
     </n-card>
@@ -42,18 +42,17 @@
 
 <script setup>
 
-import {useRoleStore} from "../../stores/role-store";
+import {useClientStore} from "../../stores/client-store";
 import {storeToRefs} from "pinia";
 import {ref} from "vue";
-import CreateRole from "./CreateRole.vue";
+import CreateClient from "./CreateClient.vue";
 
-
-const roleStore = useRoleStore()
-const {roleList, selectedList, pagination, filters} = storeToRefs(roleStore)
+const clientStore = useClientStore()
+const {clientList, selectedList, pagination, filters} = storeToRefs(clientStore)
 const showModal = ref(false);
 const isLoading = ref(false);
 const isUpdate = ref(false);
-roleStore.list();
+clientStore.list();
 
 const headers = [
     {text: "name", value: "name"},
@@ -62,7 +61,7 @@ const headers = [
 
 const onSubmit = () => {
     showModal.value = false;
-    roleStore.list();
+    clientStore.list();
 }
 
 const onPageChange = () => {
@@ -74,21 +73,20 @@ const onShow = (row) => {
 }
 
 const onDelete = (id) => {
-    roleStore.delete(id).then(res => {
-        roleStore.list();
+    clientStore.delete(id).then(res => {
+        clientStore.list();
     });
 }
 
 const onCreate = () => {
-    roleStore.selectedPermissions = [];
-    roleStore.role = {};
     isUpdate.value = false;
+    clientStore.client = {};
     showModal.value = true;
 }
 
 const onEdit = (row) => {
     isUpdate.value = true;
-    roleStore.role = row;
+    clientStore.client = row;
     showModal.value = true;
 }
 
@@ -96,5 +94,24 @@ const onEdit = (row) => {
 </script>
 
 <style scoped>
+.customize-table {
 
+    --easy-table-header-font-size: 14px;
+    --easy-table-header-height: 50px;
+
+    --easy-table-header-item-padding: 10px 15px;
+
+
+    --easy-table-body-row-height: 20px;
+    --easy-table-body-row-font-size: 12px;
+    --easy-table-body-item-padding: 4px 6px;
+
+
+    --easy-table-footer-font-size: 14px;
+    --easy-table-footer-padding: 0px 10px;
+    --easy-table-footer-height: 50px;
+
+    --easy-table-rows-per-page-selector-width: 70px;
+    --easy-table-rows-per-page-selector-option-padding: 10px;
+}
 </style>

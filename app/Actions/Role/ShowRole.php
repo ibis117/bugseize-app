@@ -13,5 +13,10 @@ class ShowRole
 
     protected string $model = Role::class;
 
+    public function handle($id)
+    {
+        return $this->model::with(['permissions'])->findOrFail($id);
+    }
+
 
 }

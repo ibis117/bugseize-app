@@ -9,6 +9,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "ibis117/crud-actions": "dev-main",
         "laravel/framework": "^9.19",
+        "laravel/octane": "^1.3",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "opcodesio/log-viewer": "^1.6",

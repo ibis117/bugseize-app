@@ -5,9 +5,11 @@ namespace App\Actions\Permission;
 use App\Attributes\Permission;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 use ReflectionClass;
 
+#[\App\Attributes\Permission(permission: 'permission:sync')]
 class SyncPermission
 {
     use AsAction;
@@ -50,5 +52,17 @@ class SyncPermission
             }
         }
         return $permissions;
+    }
+
+    public function asController(ActionRequest $request)
+    {
+        if (!$this->handle()) {
+            return response([
+                'message' => 'Unable to sync permission. Please try again'
+            ], 400);
+        }
+        return response([
+            'message' => 'Permission has been successfully synced'
+        ], 200);
     }
 }

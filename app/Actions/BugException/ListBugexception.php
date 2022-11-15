@@ -15,7 +15,10 @@ class ListBugexception
 
     protected function paginate($query, $count)
     {
-        return $query->orderBy('created_at', 'desc')
+        return $query->whereHas('project', function ($q) {
+            $q->where('user_id', auth()->user()->id);
+        })
+            ->orderBy('created_at', 'desc')
             ->paginate($count);
     }
 
