@@ -1,5 +1,5 @@
 <template>
-    <n-card title="Create User">
+    <n-card :title="props.isUpdate ? 'Update Client': 'Create Client'">
         <n-form
             ref="formRef"
             :model="client"
@@ -28,6 +28,7 @@ import {useClientStore} from "../../stores/client-store";
 const formRef = ref(null)
 const clientStore = useClientStore();
 const {client} = storeToRefs(clientStore)
+
 
 const props = defineProps({
     isUpdate: {

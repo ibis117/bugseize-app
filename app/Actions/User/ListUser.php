@@ -20,13 +20,20 @@ class ListUser
         $class = new ReflectionClass($this);
         $arguments = $class->getAttributes(Permission::class);
         $permission = $arguments[0]->getArguments()['permission'];
+//        dd($request->user()->hasPermissionTo('user:list'));
         return $request->user()->hasPermissionTo($permission);
     }
 
-    protected function paginate($query, $count)
+    protected function filter($query, $filter)
     {
-        return $query->with(['roles','clients'])->paginate($count);
-
+        $query = $query->with(['roles','clients']);
+        $user = auth()->user();
+        if (!$user->hasRole('super-admin')) {
+            $query->whereHas('clients',function($q) use ($user) {
+                $q->where('user_id', $user->id);
+            });
+        }
+        return $query;
     }
 
 }

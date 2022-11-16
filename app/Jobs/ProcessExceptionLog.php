@@ -41,6 +41,7 @@ class ProcessExceptionLog implements ShouldQueue
 
         $log = $exception_log->log;
         $project_id = $exception_log->project_id;
+        $client_id = $exception_log->client_id;
         $errors = $log['error'];
         $executor = $log['executor'];
         $storage = $log['storage'];
@@ -58,6 +59,7 @@ class ProcessExceptionLog implements ShouldQueue
             'exception' => $exception,
             'line' => $line,
             'project_id' => $project_id,
+            'client_id' => $client_id
         ], [
             'last_occurred_at' => now()
         ]);
@@ -77,6 +79,7 @@ class ProcessExceptionLog implements ShouldQueue
             'project_id' => $project_id,
             'issue_id' => $issue->id,
             'status' => 'unread',
+            'client_id' => $client_id
         ]);
 
         if (!$issue->bug_exception_id) {

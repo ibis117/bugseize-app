@@ -46,7 +46,11 @@ export const useUserStore = defineStore('user', {
         },
 
         create() {
-            return axios.post(`${API_URL}`, this.user)
+            return axios.post(`${API_URL}`, {
+                ...this.user,
+                role_id: this.selectedRole,
+                client_id: this.selectedClient
+            })
         },
 
         update() {

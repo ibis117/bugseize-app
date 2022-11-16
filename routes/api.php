@@ -3,6 +3,7 @@
 use App\Actions\Centrifuge\CreateCentrifugeUserToken;
 use App\Actions\Log\CreateExceptionLog;
 use App\Actions\User\UserRecentExceptions;
+use App\Http\Middleware\CheckPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return response($request->user(), 200);
 });
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum', CheckPermission::class]], function () {
     //projects
     Route::post('/projects', App\Actions\Project\CreateProject::class);
     Route::get('/projects', App\Actions\Project\ListProject::class);
@@ -79,11 +80,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/permissions/{permission}', App\Actions\Permission\DeletePermission::class);
     Route::post('/sync-permission', App\Actions\Permission\SyncPermission::class);
 
+//Clients
+    Route::post('/clients', App\Actions\Client\CreateClient::class);
+    Route::get('/clients', App\Actions\Client\ListClient::class);
+    Route::get('/clients/{client}', App\Actions\Client\ShowClient::class);
+    Route::put('/clients/{client}', App\Actions\Client\UpdateClient::class);
+    Route::delete('/clients/{client}', App\Actions\Client\DeleteClient::class);
+
 });
 
 
-Route::post('/clients', App\Actions\Client\CreateClient::class);
-Route::get('/clients', App\Actions\Client\ListClient::class);
-Route::get('/clients/{client}', App\Actions\Client\ShowClient::class);
-Route::put('/clients/{client}', App\Actions\Client\UpdateClient::class);
-Route::delete('/clients/{client}', App\Actions\Client\DeleteClient::class);

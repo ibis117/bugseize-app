@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('bug_exceptions', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('client_id');
             $table->string('host');
             $table->string('method');
             $table->string('full_url');
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->text('file');
             $table->json('user')->nullable();
             $table->string('status')->default('unread');
-            $table->string('project_id');
+            $table->uuid('project_id');
             $table->string('issue_id')->nullable();
             $table->softDeletes();
             $table->timestamps();

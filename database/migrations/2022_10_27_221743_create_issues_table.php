@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('exception');
+            $table->uuid('client_id');
+            $table->uuid('exception');
             $table->integer('line');
             $table->string('project_id');
             $table->string('bug_exception_id')->nullable();

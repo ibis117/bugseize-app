@@ -13,8 +13,13 @@ class ListRole
 
     protected string $model = Role::class;
 
-    protected function paginate($query, $count)
+    protected function filter($query, $filter)
     {
-        return $query->with(['permissions'])->paginate($count);
+        $user = auth()->user();
+        if (!$user->hasRole('super-admin')) {
+            $query->where('name', '!=', 'super-admin');
+        }
+        return $query->with(['permissions']);
     }
+
 }

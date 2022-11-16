@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('exception_logs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->json('log');
-            $table->string('project_id')->nullable();
+            $table->uuid('client_id');
+            $table->uuid('project_id')->nullable();
             $table->boolean('is_processed')->default(false);
             $table->softDeletes();
             $table->timestamps();

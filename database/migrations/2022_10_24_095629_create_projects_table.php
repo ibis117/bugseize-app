@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('client_id');
             $table->string('name');
             $table->text('key');
             $table->string('url');

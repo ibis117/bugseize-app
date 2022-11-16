@@ -12,11 +12,12 @@ class CreateExceptionLog
 {
     use AsAction;
 
-    public function handle($data, $project_id)
+    public function handle($data, $project_id, $client_id)
     {
         $exceptionLog = ExceptionLog::create([
             'log' => $data,
-            'project_id' => $project_id
+            'project_id' => $project_id,
+            'client_id' => $client_id
         ]);
 
         ProcessExceptionLog::dispatch($exceptionLog);
@@ -28,7 +29,7 @@ class CreateExceptionLog
         $project = Project::where('key', $request->header('X-BugSeize-Key'))
             ->first();
         if ($project) {
-            $result = $this->handle($request->all(), $project->id);
+            $result = $this->handle($request->all(), $project->id, $project->client_id);
             if ($result) {
                 return response(['message' => 'Recorded Successfully'], 200);
             }

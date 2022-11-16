@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import axios from "../api/axios";
+import {useClientStore} from "./client-store";
 
 export const useProjectStore = defineStore('project', {
     state: () => ({
@@ -18,7 +19,11 @@ export const useProjectStore = defineStore('project', {
                 page: this.currentPage,
                 rowsPerPage: this.perPage,
             }
-        }
+        },
+
+        clients() {
+            return useClientStore().clientList;
+        },
     },
 
     actions: {

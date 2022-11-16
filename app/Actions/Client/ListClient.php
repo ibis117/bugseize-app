@@ -11,4 +11,16 @@ class ListClient
     use ListAction;
 
     protected string $model = Client::class;
+
+
+    protected function filter($query, $filter)
+    {
+        $user = auth()->user();
+        if (!$user->hasRole('super-admin')) {
+            $client = $user->clients()->first();
+            $query->where('id', $client->id);
+        }
+        return $query;
+    }
+
 }
