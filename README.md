@@ -3,4 +3,4 @@
 
 Project to catch given exception from laravel and display under admin panel
 
-test 1
+test 2
