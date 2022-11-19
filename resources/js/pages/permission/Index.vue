@@ -28,8 +28,8 @@
             </EasyDataTable>
         </div>
         <div class="flex mt-4 justify-end">
-            <n-pagination v-model:page="pagination.currentPage" :page-count="pagination.lastPage"
-                          @update:page="onPageChange"/>
+<!--            <n-pagination v-model:page="pagination.currentPage" :page-count="pagination.lastPage"-->
+<!--                          @update:page="onPageChange"/>-->
         </div>
 
 

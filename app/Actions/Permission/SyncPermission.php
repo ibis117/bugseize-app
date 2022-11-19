@@ -24,13 +24,18 @@ class SyncPermission
 
     public function handle()
     {
-        $permissions = $this->permissions();
-        foreach ($permissions as $permission) {
-            [$group, $action] = explode(':', $permission);
-            \App\Models\Permission::updateOrCreate([
-                'name' => $permission,
-                'group_name' => $group
-            ]);
+        try {
+            $permissions = $this->permissions();
+            foreach ($permissions as $permission) {
+                [$group, $action] = explode(':', $permission);
+                \App\Models\Permission::updateOrCreate([
+                    'name' => $permission,
+                    'group_name' => $group
+                ]);
+            }
+            return true;
+        } catch (\Exception $e) {
+            return false;
         }
     }
 

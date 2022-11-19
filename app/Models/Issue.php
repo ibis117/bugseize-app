@@ -16,4 +16,9 @@ class Issue extends Model
     {
         return $this->hasMany(BugException::class);
     }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

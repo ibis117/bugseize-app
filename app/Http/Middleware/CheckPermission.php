@@ -19,13 +19,14 @@ class CheckPermission
      */
     public function handle(Request $request, Closure $next)
     {
-        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         $actionClass = Route::current()->action['controller'];
         $class = new ReflectionClass($actionClass);
         $arguments = $class->getAttributes(Permission::class);
         if (!empty($arguments)) {
             $permission = $arguments[0]->getArguments()['permission'];
-            abort_if(!$request->user()->hasPermissionTo($permission), 403);
+            if (!$request->user()->hasPermissionTo($permission)) {
+                return response()->json(['message' => 'In sufficient permission'], 403);
+            }
         }
         return $next($request);
     }
